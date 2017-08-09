@@ -52,7 +52,23 @@ INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
 ```
 表示hexo本地配置完成。
 
-## 
+## Hexo和Github
+
+首先安装扩展：
+```
+$ npm install hexo-deployer-git --save 
+```
+然后修改_config.yml文件：
+```
+deploy:
+  type: git
+  repo: git@github.com:yourname/yourname.github.io.git
+  branch: master
+```
+生成和部署：
+```
+$ hexo d -g
+```
 
 ## Quick Start
 
