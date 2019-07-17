@@ -353,7 +353,7 @@
       
         
           
-            <h3 id="译-25个C-API设计错误和规避方法"><a href="#译-25个C-API设计错误和规避方法" class="headerlink" title="[译]25个C++ API设计错误和规避方法"></a>[译]25个C++ API设计错误和规避方法</h3><p><a href="https://www.acodersjourney.com/top-25-cplusplus-api-design-mistakes-and-how-to-avoid-them/" target="_blank" rel="noopener">原文链接</a></p>
+            <p><a href="https://www.acodersjourney.com/top-25-cplusplus-api-design-mistakes-and-how-to-avoid-them/" target="_blank" rel="noopener">原文链接</a></p>
 <p>对于许多C++开发者来说，他们可能把API设计的优先级排到第三或者第四。大多数拥抱C++的开发者都是因为它的原始能力和控制权。因此，性能和优化占据了他们百分之八十的时间。</p>
 <p>当然，每一位C++开发者都考虑头文件设计的各个方面，但是API的设计不仅仅只有头文件的设计。事实上，我强烈推荐每一位开发者多思考API的设计，无论是面向公共的还是面向内部的，它都能节约维护成本，提供平滑升级路径并且帮你客户省去麻烦。</p>
 <p>以下列出的许多错误都是我的个人经验和我从Martin Reddy的精彩书籍《C ++ API Design》（我强烈推荐的书）中学到的东西的结合。如果你真的想深入了解c++ API设计，你应该读这本书，然后使用下面的列表作为更多的清单来强制执行代码审查。</p>
@@ -811,7 +811,7 @@
       
         
           
-            <h2 id="Effective-C"><a href="#Effective-C" class="headerlink" title="Effective C++"></a>Effective C++</h2><p>本文旨在回顾和记录《Effective C++》一书中的关于C++的55条建议，及每一条简要说明，结构同书中目录。所有的建议并非完全适用，但可以作为指导。</p>
+            <p>本文旨在回顾和记录《Effective C++》一书中的关于C++的55条建议，及每一条简要说明，结构同书中目录。所有的建议并非完全适用，但可以作为指导。</p>
 <h4 id="让自己习惯C"><a href="#让自己习惯C" class="headerlink" title="让自己习惯C++"></a>让自己习惯C++</h4><h5 id="1-视C-为一个语言联邦"><a href="#1-视C-为一个语言联邦" class="headerlink" title="1. 视C+为一个语言联邦"></a><em>1. 视C+为一个语言联邦</em></h5><p>C++由四个部分组成，<code>c with class</code>，<code>Object-Oriented C++</code>, <code>Template C++</code>, <code>STL</code>。</p>
 <h5 id="2-尽量以const-enum-inline替换-define"><a href="#2-尽量以const-enum-inline替换-define" class="headerlink" title="2. 尽量以const,enum,inline替换#define"></a><em>2. 尽量以<code>const</code>,<code>enum</code>,<code>inline</code>替换<code>#define</code></em></h5><p><code>#define</code>只是单纯的字符串替换，因此不做类型检查，而且定义宏时最好加上小括号，防止调用宏后出现非预期结果。</p>
 <p>对于单纯的常量，最好以<code>const</code>对象或<code>enum</code>替换<code>#define</code></p>
