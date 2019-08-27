@@ -272,6 +272,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/模版参数推导/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vicvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vicvon's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/09/模版参数推导/" itemprop="url">模版参数推导</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T16:51:40+08:00">
+                2017-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/cplusplus/" itemprop="url" rel="index">
+                    <span itemprop="name">cplusplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/09/模版参数推导/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/09/模版参数推导/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="模版参数推导"><a href="#模版参数推导" class="headerlink" title="模版参数推导"></a><a href="http://en.cppreference.com/w/cpp/language/template_argument_deduction" target="_blank" rel="noopener">模版参数推导</a></h3><p>类型推导的几个说明：</p>
+<ol>
+<li>如果模版参数是一个非引用类型<ul>
+<li>如果实际参数是一个数组，类型推导会把模版参数推导为指针(数组转指针)</li>
+<li>如果实际参数是一个函数，类型推导会把模版参数推导为指针(函数转指针)</li>
+<li>如果实际参数是一个cv类型，类型推导会把顶层CV属性忽略</li>
+</ul>
+</li>
+<li>如果模版参数是一个CV类型，类型推导会把顶层CV属性忽略</li>
+<li>如果模版参数是一个引用类型，被模版参数引用的类型被用来推导</li>
+<li>如果模版参数是一个没有CV限定符的右值引用，并且相应的函数调用参数是一个左值，则使用左值引用类型来推导(这种行为称为<code>forward reference</code>)</li>
+</ol>
+<p>一般推导过程失败，则考虑以下方案：</p>
+<ol>
+<li><p>如果模版参数是一个引用类型，被推导类型可以比实际参数多CV限定符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void f(const T&amp; t);</span><br><span class="line">bool a = false;</span><br><span class="line">f(a);</span><br><span class="line">/*</span><br><span class="line"> * 模版参数可以被调整为const T(规则3),a实际是bool类型,经过类型推导后a变为const bool类型</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>传入参数可以是另一个能被<a href="http://en.cppreference.com/w/cpp/language/implicit_conversion#Qualification_conversions" target="_blank" rel="noopener">qualification conversions</a>或函数指针转换的指针或成员指针</p>
+</li>
+<li>如果模版参数是一个类并且是一个<code>simple-template-id</code>形式，传入参数类型可以是推导类型的派生类，同样的，如果模版参数是一个<code>simple-template-id</code>形式类的指针，传入参数类型可以是推导类型的派生类指针<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class T&gt; struct B &#123; &#125;;</span><br><span class="line">template&lt;class T&gt; struct D : public B&lt;T&gt; &#123; &#125;;</span><br><span class="line">template&lt;class T&gt; void f(B&lt;T&gt;&amp;) &#123; &#125;</span><br><span class="line"> </span><br><span class="line">void f()</span><br><span class="line">&#123;</span><br><span class="line">    D&lt;int&gt; d;</span><br><span class="line">    f(d);</span><br><span class="line">    /*</span><br><span class="line">     * 模版参数是B&lt;T&gt;&amp;,可以被调整为B&lt;T&gt;,传入参数类型是D&lt;int&gt;,T被推导为int,则实际传入类型D&lt;int&gt;是推导类型B&lt;int&gt;的派生类</span><br><span class="line">     */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/关于top-level-cv-qualifiers/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1775,163 +1947,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/关于gcc对strlen优化的问题/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vicvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vicvon's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/22/关于gcc对strlen优化的问题/" itemprop="url">关于gcc对strlen优化的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T10:13:04+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/learning/" itemprop="url" rel="index">
-                    <span itemprop="name">learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/22/关于gcc对strlen优化的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/22/关于gcc对strlen优化的问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="关于GCC对strlen优化的问题"><a href="#关于GCC对strlen优化的问题" class="headerlink" title="关于GCC对strlen优化的问题"></a>关于GCC对strlen优化的问题</h4><p>代码优先：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">const char *str = &quot;abcdadkjadasdasdasdasdasdasdasdasdfgeghrthrthrhrthrthrthrthrthrthrthrthrthrthrthvdvdvscvscawdaadasadaefg&quot;;</span><br><span class="line"></span><br><span class="line">#define BUFF_LEN	1000</span><br><span class="line"></span><br><span class="line">int fun()</span><br><span class="line">&#123;</span><br><span class="line">    char buf[BUFF_LEN] = &#123;0&#125;;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; strlen(str); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        buf[i] = str[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#define LOOP    100000</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    struct timeval start, end;</span><br><span class="line">    gettimeofday(&amp;start, NULL);</span><br><span class="line">    for (int i = 0; i &lt; LOOP; ++i)</span><br><span class="line">        fun();</span><br><span class="line">    gettimeofday(&amp;end, NULL);</span><br><span class="line">    printf(&quot;fun time: %d\n&quot;, (end.tv_sec - start.tv_sec) * 1000 + (end.tv_usec - start.tv_usec) / 1000);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>os：centos 6.5 64位，编译器gcc4.4.7，分别使用优化等级0-2编译代码，运行时间如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -O0 -std=c99 stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 105</span><br><span class="line">$ gcc -O1 -std=c99 stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 775</span><br><span class="line">$ gcc -O2 -std=c99 stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 0</span><br></pre></td></tr></table></figure></p>
-<p>然后添加编译选项<code>-fno-builtin-strlen</code>，运行时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -O0 -std=c99 -fno-builtin-strlen stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 95</span><br><span class="line">$ gcc -O1 -std=c99 -fno-builtin-strlen stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 72</span><br><span class="line">$ gcc -O2 -std=c99 -fno-builtin-strlen stro.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ fun time: 0</span><br></pre></td></tr></table></figure></p>
-<p>发现在O1优化等级下加与不加<code>-fno-builtin-strlen</code>对程序影响很大，为了找出原因，从汇编代码入手分析。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">O1不加-fno-builtin-strlen的汇编代码</span><br><span class="line">0000000000400514 &lt;fun&gt;:</span><br><span class="line">  400514:	ba 00 00 00 00       	mov    $0x0,%edx</span><br><span class="line">  400519:	48 c7 c6 ff ff ff ff 	mov    $0xffffffffffffffff,%rsi</span><br><span class="line">  400520:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  400525:	eb 03                	jmp    40052a &lt;fun+0x16&gt;</span><br><span class="line">  400527:	83 c2 01             	add    $0x1,%edx</span><br><span class="line">  40052a:	48 8b 3d e7 04 20 00 	mov    0x2004e7(%rip),%rdi        # 600a18 &lt;str&gt;</span><br><span class="line">  400531:	48 89 f1             	mov    %rsi,%rcx</span><br><span class="line">  400534:	f2 ae                	repnz scas %es:(%rdi),%al</span><br><span class="line">  400536:	48 f7 d1             	not    %rcx</span><br><span class="line">  400539:	48 83 e9 01          	sub    $0x1,%rcx</span><br><span class="line">  40053d:	48 63 fa             	movslq %edx,%rdi</span><br><span class="line">  400540:	48 39 cf             	cmp    %rcx,%rdi</span><br><span class="line">  400543:	72 e2                	jb     400527 &lt;fun+0x13&gt;</span><br><span class="line">  400545:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  40054a:	c3                   	retq   </span><br><span class="line"></span><br><span class="line">O1加-fno-builtin-strlen的汇编代码</span><br><span class="line">0000000000400554 &lt;fun&gt;:</span><br><span class="line">  400554:	53                   	push   %rbx</span><br><span class="line">  400555:	bb 00 00 00 00       	mov    $0x0,%ebx</span><br><span class="line">  40055a:	eb 03                	jmp    40055f &lt;fun+0xb&gt;</span><br><span class="line">  40055c:	83 c3 01             	add    $0x1,%ebx</span><br><span class="line">  40055f:	48 8b 3d f2 04 20 00 	mov    0x2004f2(%rip),%rdi        # 600a58 &lt;str&gt;</span><br><span class="line">  400566:	e8 f5 fe ff ff       	callq  400460 &lt;strlen@plt&gt;</span><br><span class="line">  40056b:	48 63 d3             	movslq %ebx,%rdx</span><br><span class="line">  40056e:	48 39 c2             	cmp    %rax,%rdx</span><br><span class="line">  400571:	72 e9                	jb     40055c &lt;fun+0x8&gt;</span><br><span class="line">  400573:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  400578:	5b                   	pop    %rbx</span><br><span class="line">  400579:	c3                   	retq</span><br></pre></td></tr></table></figure></p>
-<p>通过汇编代码发现，如果不加<code>-fno-builtin-strlen</code>选项，gcc在O1优化等级下会把<code>strlen</code>编译成<code>repnz scas %es:(%rdi),%al</code>指令，通过查阅资料发现该指令是一条扫描指令(可能描述不准确)，目的是计算字符串长度，而使用<code>-fno-builtin-strlen</code>选项，就直接调用<code>strlen</code>库函数。</p>
-<p>通过运行时间来看gcc在O1等级下对<code>strlen</code>的优化不如glibc的<code>strlen</code>函数，而<code>-fno-builtin-strlen</code>选项就是关闭gcc对strlen的优化，同样的<code>memcmp</code>好像有类似的情况，待以后分析。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1984,7 +1999,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
