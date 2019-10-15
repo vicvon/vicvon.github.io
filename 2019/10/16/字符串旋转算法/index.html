@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="C++11六种内存模型 memory_order_relaxed: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation’s atomicity is guaranteed(松散操作，在别的读/写上没有">
+<meta name="description" content="字符串旋转算法题目描述把长度为N的字符串向右移动M位，如字符串abcdefghij向右移动3位为defghijabc，这里为了方便，假设M&amp;lt;N。 题目解法这里直接跳过暴力解法和一般递归移位算法，主要分析一下旋转相除法 或 环状替换法。 基本思路是直接将每一个字符一步到位移动到它最终的位置上，原本最终位置上的数以同样的方式移动，一步一步推进，直到回到最初的位置上，结束本次循环。但是一次循环不一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++内存模型">
-<meta property="og:url" content="http://yoursite.com/2017/10/09/c-内存模型/index.html">
+<meta property="og:title" content="字符串旋转算法">
+<meta property="og:url" content="http://yoursite.com/2019/10/16/字符串旋转算法/index.html">
 <meta property="og:site_name" content="vicvon&#39;s blog">
-<meta property="og:description" content="C++11六种内存模型 memory_order_relaxed: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation’s atomicity is guaranteed(松散操作，在别的读/写上没有">
+<meta property="og:description" content="字符串旋转算法题目描述把长度为N的字符串向右移动M位，如字符串abcdefghij向右移动3位为defghijabc，这里为了方便，假设M&amp;lt;N。 题目解法这里直接跳过暴力解法和一般递归移位算法，主要分析一下旋转相除法 或 环状替换法。 基本思路是直接将每一个字符一步到位移动到它最终的位置上，原本最终位置上的数以同样的方式移动，一步一步推进，直到回到最初的位置上，结束本次循环。但是一次循环不一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-24T12:46:30.213Z">
+<meta property="og:updated_time" content="2019-10-15T16:30:22.603Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="c++内存模型">
-<meta name="twitter:description" content="C++11六种内存模型 memory_order_relaxed: Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation’s atomicity is guaranteed(松散操作，在别的读/写上没有">
+<meta name="twitter:title" content="字符串旋转算法">
+<meta name="twitter:description" content="字符串旋转算法题目描述把长度为N的字符串向右移动M位，如字符串abcdefghij向右移动3位为defghijabc，这里为了方便，假设M&amp;lt;N。 题目解法这里直接跳过暴力解法和一般递归移位算法，主要分析一下旋转相除法 或 环状替换法。 基本思路是直接将每一个字符一步到位移动到它最终的位置上，原本最终位置上的数以同样的方式移动，一步一步推进，直到回到最初的位置上，结束本次循环。但是一次循环不一">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/09/c-内存模型/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/16/字符串旋转算法/">
 
 
 
 
 
-  <title>c++内存模型 | vicvon's blog</title>
+  <title>字符串旋转算法 | vicvon's blog</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/c-内存模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/字符串旋转算法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vicvon">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">c++内存模型</h1>
+          <h1 class="post-title" itemprop="name headline">字符串旋转算法</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T16:50:13+08:00">
-                2017-10-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T00:28:29+08:00">
+                2019-10-16
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/cplusplus/" itemprop="url" rel="index">
-                    <span itemprop="name">cplusplus</span>
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/09/c-内存模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/09/c-内存模型/" itemprop="commentCount"></span>
+                <a href="/2019/10/16/字符串旋转算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/16/字符串旋转算法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,48 +371,22 @@
       
 
       
-        <h3 id="C-11六种内存模型"><a href="#C-11六种内存模型" class="headerlink" title="C++11六种内存模型"></a>C++11六种内存模型</h3><ol>
-<li><strong>memory_order_relaxed</strong>: <em>Relaxed operation: there are no synchronization or ordering constraints imposed on other reads or writes, only this operation’s atomicity is guaranteed</em>(松散操作，在别的读/写上没有强制同步或者顺序限制，仅仅保证该操作是原子的)</li>
-<li><strong>memory_order_consume</strong>: <em>A load operation with this memory order performs a consume operation on the affected memory location: no reads or writes in the current thread dependent on the value currently loaded can be reordered before this load. Writes to data-dependent variables in other threads that release the same atomic variable are visible in the current thread. On most platforms, this affects compiler optimizations only</em>(使用<code>memory_order_consume</code>的加载操作施加一个<code>consume</code>操作在相关的内存位置<code>memory location</code>: 当前线程，没有依赖当前值的读/写可以重排序在加载之前。在释放相同原子变量的线程中写入数据依赖的变量对当前线程是可见的。在大多数平台，这仅仅影响了编译器的优化)</li>
-<li><strong>memory_order_acquire</strong>: <em>A load operation with this memory order performs the acquire operation on the affected memory location: no reads or writes in the current thread can be reordered before this load. All writes in other threads that release the same atomic variable are visible in the current thread</em>(使用<code>memory_order_acquire</code>的加载操作施加一个<code>acquire</code>操作在相关的内存位置：当前线程没有读/写可以被重排序在加载之前。在释放相同原子变量的线程中所有的写对当前线程可见。)</li>
-<li><strong>memory_order_release</strong>: <em>A store operation with this memory order performs the release operation: no reads or writes in the current thread can be reordered after this store. All writes in the current thread are visible in other threads that acquire the same atomic variable and writes that carry a dependency into the atomic variable become visible in other threads that consume the same atomic</em>(使用<code>memory_order_release</code>的存储操作施加一个<code>release</code>操作：在当前线程，没有读/写可以重排序在存储之后。当前线程的所有写入对获取相同原子变量的线程可见，并且，写入携带依赖到一个原子变量对消费相同原子变量的线程可见)</li>
-<li><strong>memory_order_acq_rel</strong>: <em>A read-modify-write operation with this memory order is both an acquire operation and a release operation. No memory reads or writes in the current thread can be reordered before or after this store. All writes in other threads that release the same atomic variable are visible before the modification and the modification is visible in other threads that acquire the same atomic variable.</em>(<code>memory_order_acq_rel</code>使读改写操作具有<code>acquire</code>和<code>release</code>属性。当前线程，没有读可以重排到存储之前，没有写可以重排到存储之后。释放相同原子变量的线程的所有写入在修改之前是可见的，并且修改对获取相同原子变量的线程是可见的)</li>
-<li><strong>memory_order_seq_cst</strong>: <em>Any operation with this memory order is both an acquire operation and a release operation, plus a single total order exists in which all threads observe all modifications in the same order</em>(<code>memory_order_seq_cst</code>的任何操作都是<code>acquire</code>和<code>release</code>的，存在一个顺序，所有的修改对所有的线程有相同的顺序)</li>
+        <h3 id="字符串旋转算法"><a href="#字符串旋转算法" class="headerlink" title="字符串旋转算法"></a>字符串旋转算法</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>把长度为N的字符串向右移动M位，如字符串<code>abcdefghij</code>向右移动3位为<code>defghijabc</code>，这里为了方便，假设<code>M&lt;N</code>。</p>
+<h4 id="题目解法"><a href="#题目解法" class="headerlink" title="题目解法"></a>题目解法</h4><p>这里直接跳过暴力解法和一般递归移位算法，主要分析一下<em>旋转相除法</em> 或 <em>环状替换法</em>。</p>
+<p>基本思路是直接将每一个字符一步到位移动到它最终的位置上，原本最终位置上的数以同样的方式移动，一步一步推进，直到回到最初的位置上，结束本次循环。但是一次循环不一定能操作到每个字符，如果<code>N%M=0(M≠1)</code>，则一次循环无法遍历到每一个字符上，所以需要从上一次循环起始位置的下一个位置开始继续如上操作。</p>
+<p>那么，什么时候可以停止呢？第一种理解是总共遍历交换<code>N</code>次就停止，这种比较好理解，所有的字符全部操作到就可以停止；第二种理解是循环<code>gcd(N,M)</code>次停止，这里<code>gcd(N,M)</code>是<code>N</code>和<code>M</code>的最大公约数，每一次循环交换<code>N/gcd(N,M)</code>次，那么为什么是<code>gcd(N,M)</code>次循环呢？</p>
+<p>例如，字符串长度为6，移动2位，那么第一次移动的顺序是<code>0-&gt;2-&gt;4-&gt;0</code>回到初始位置，第二次移动的顺序是<code>1-&gt;3-&gt;5-&gt;1</code>，至此所有的元素都被访问到。</p>
+<p>下面是2中理解方式的代码(这里把字符串换成数组)：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种理解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k = k % nums.size();</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> start = <span class="number">0</span>; count &lt; nums.size(); start++) &#123;</span><br><span class="line">            <span class="keyword">int</span> current = start;</span><br><span class="line">            <span class="keyword">int</span> prev = nums[current];</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> next = (current + k) % nums.size();</span><br><span class="line">                <span class="keyword">int</span> temp = nums[next];</span><br><span class="line">                nums[next] = prev;</span><br><span class="line">                prev = temp;</span><br><span class="line">                current = next;</span><br><span class="line">                count++;</span><br><span class="line">            &#125; <span class="keyword">while</span>(start != current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二种理解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> length = nums.size();</span><br><span class="line">        <span class="keyword">int</span> loopCount = gcd(length, k); <span class="comment">// 欧几里得循环相除法计算最大公约数</span></span><br><span class="line">        <span class="keyword">int</span> elems = length / loopCount;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopCount; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; elems; j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp1 = nums[(i + (j + <span class="number">1</span>) * k) % length];</span><br><span class="line">                nums[(i + (j + <span class="number">1</span>) * k) % length] = temp;</span><br><span class="line">                temp = temp1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>还有一种相对巧妙的方法三步翻转法，相对来说要容易理解，参考文章中有说明，本文重点介绍<em>旋转相除法</em> 或 <em>环状替换法</em></p>
+<p>参考：</p>
+<ol>
+<li><p><a href="https://leetcode-cn.com/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode/" target="_blank" rel="noopener">leetcode 189</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/6322882" target="_blank" rel="noopener">左旋转字符串</a></p>
+</li>
 </ol>
-<h3 id="深入理解C-11中的解释"><a href="#深入理解C-11中的解释" class="headerlink" title="深入理解C++11中的解释"></a>深入理解C++11中的解释</h3><table>
-<thead>
-<tr>
-<th>memory_order</th>
-<th>described</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>memory_order_relaxed</td>
-<td>不对执行顺序做任何保证</td>
-</tr>
-<tr>
-<td>memory_order_consume</td>
-<td>本线程中，所有后续的有关本原子类型的操作，必须在本条原子操作完成之后执行</td>
-</tr>
-<tr>
-<td>memory_order_acquire</td>
-<td>本线程中，所有后续的读操作必须在本条原子操作完成之后执行</td>
-</tr>
-<tr>
-<td>memory_order_release</td>
-<td>本线程中，所有之前的写操作完成后才能执行本条原子操作</td>
-</tr>
-<tr>
-<td>memory_order_acq_rel</td>
-<td>同时包含<code>memory_order_acquire</code>和<code>memory_order_release</code></td>
-</tr>
-<tr>
-<td>memory_order_seq_cst</td>
-<td>全部存取都按顺序执行</td>
-</tr>
-</tbody>
-</table>
 
       
     </div>
@@ -437,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/09/C-标准关于类的解释-POD、trivial、standard-layout/" rel="next" title="C++标准关于类的解释(POD、trivial、standard-layout)">
-                <i class="fa fa-chevron-left"></i> C++标准关于类的解释(POD、trivial、standard-layout)
+              <a href="/2019/08/27/cpp编译器检查函数参数/" rel="next" title="c++编译器检查函数参数">
+                <i class="fa fa-chevron-left"></i> c++编译器检查函数参数
               </a>
             
           </div>
@@ -446,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/09/关于top-level-cv-qualifiers/" rel="prev" title="关于top-level cv-qualifiers">
-                关于top-level cv-qualifiers <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -603,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-11六种内存模型"><span class="nav-number">1.</span> <span class="nav-text">C++11六种内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入理解C-11中的解释"><span class="nav-number">2.</span> <span class="nav-text">深入理解C++11中的解释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串旋转算法"><span class="nav-number">1.</span> <span class="nav-text">字符串旋转算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目解法"><span class="nav-number">1.2.</span> <span class="nav-text">题目解法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -775,9 +745,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/09/c-内存模型/';
-          this.page.identifier = '2017/10/09/c-内存模型/';
-          this.page.title = 'c++内存模型';
+          this.page.url = 'http://yoursite.com/2019/10/16/字符串旋转算法/';
+          this.page.identifier = '2019/10/16/字符串旋转算法/';
+          this.page.title = '字符串旋转算法';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://vicvon1.disqus.com/embed.js';

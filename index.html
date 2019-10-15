@@ -272,6 +272,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/字符串旋转算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vicvon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vicvon's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/16/字符串旋转算法/" itemprop="url">字符串旋转算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T00:28:29+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/16/字符串旋转算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/16/字符串旋转算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="字符串旋转算法"><a href="#字符串旋转算法" class="headerlink" title="字符串旋转算法"></a>字符串旋转算法</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>把长度为N的字符串向右移动M位，如字符串<code>abcdefghij</code>向右移动3位为<code>defghijabc</code>，这里为了方便，假设<code>M&lt;N</code>。</p>
+<h4 id="题目解法"><a href="#题目解法" class="headerlink" title="题目解法"></a>题目解法</h4><p>这里直接跳过暴力解法和一般递归移位算法，主要分析一下<em>旋转相除法</em> 或 <em>环状替换法</em>。</p>
+<p>基本思路是直接将每一个字符一步到位移动到它最终的位置上，原本最终位置上的数以同样的方式移动，一步一步推进，直到回到最初的位置上，结束本次循环。但是一次循环不一定能操作到每个字符，如果<code>N%M=0(M≠1)</code>，则一次循环无法遍历到每一个字符上，所以需要从上一次循环起始位置的下一个位置开始继续如上操作。</p>
+<p>那么，什么时候可以停止呢？第一种理解是总共遍历交换<code>N</code>次就停止，这种比较好理解，所有的字符全部操作到就可以停止；第二种理解是循环<code>gcd(N,M)</code>次停止，这里<code>gcd(N,M)</code>是<code>N</code>和<code>M</code>的最大公约数，每一次循环交换<code>N/gcd(N,M)</code>次，那么为什么是<code>gcd(N,M)</code>次循环呢？</p>
+<p>例如，字符串长度为6，移动2位，那么第一次移动的顺序是<code>0-&gt;2-&gt;4-&gt;0</code>回到初始位置，第二次移动的顺序是<code>1-&gt;3-&gt;5-&gt;1</code>，至此所有的元素都被访问到。</p>
+<p>下面是2中理解方式的代码(这里把字符串换成数组)：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种理解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k = k % nums.size();</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> start = <span class="number">0</span>; count &lt; nums.size(); start++) &#123;</span><br><span class="line">            <span class="keyword">int</span> current = start;</span><br><span class="line">            <span class="keyword">int</span> prev = nums[current];</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> next = (current + k) % nums.size();</span><br><span class="line">                <span class="keyword">int</span> temp = nums[next];</span><br><span class="line">                nums[next] = prev;</span><br><span class="line">                prev = temp;</span><br><span class="line">                current = next;</span><br><span class="line">                count++;</span><br><span class="line">            &#125; <span class="keyword">while</span>(start != current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二种理解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> length = nums.size();</span><br><span class="line">        <span class="keyword">int</span> loopCount = gcd(length, k); <span class="comment">// 欧几里得循环相除法计算最大公约数</span></span><br><span class="line">        <span class="keyword">int</span> elems = length / loopCount;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopCount; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; elems; j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp1 = nums[(i + (j + <span class="number">1</span>) * k) % length];</span><br><span class="line">                nums[(i + (j + <span class="number">1</span>) * k) % length] = temp;</span><br><span class="line">                temp = temp1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>还有一种相对巧妙的方法三步翻转法，相对来说要容易理解，参考文章中有说明，本文重点介绍<em>旋转相除法</em> 或 <em>环状替换法</em></p>
+<p>参考：</p>
+<ol>
+<li><p><a href="https://leetcode-cn.com/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode/" target="_blank" rel="noopener">leetcode 189</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/6322882" target="_blank" rel="noopener">左旋转字符串</a></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/cpp编译器检查函数参数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1968,158 +2135,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/C-and-the-Perils-of-Double-Checked-Locking/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vicvon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vicvon's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/09/C-and-the-Perils-of-Double-Checked-Locking/" itemprop="url">C++ and the Perils of Double-Checked Locking</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T17:00:42+08:00">
-                2017-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/cplusplus/" itemprop="url" rel="index">
-                    <span itemprop="name">cplusplus</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/09/C-and-the-Perils-of-Double-Checked-Locking/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/09/C-and-the-Perils-of-Double-Checked-Locking/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="/resources/C++_and_the_Perils_of_Double-Checked_Locking.pdf">C++ and the Perils of Double-Checked Locking</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2172,7 +2187,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
